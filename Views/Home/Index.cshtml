@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+  
+    @if (User.Identity.IsAuthenticated)
+    {
+        @* var nameClaim = User.Claims.FirstOrDefault(c => c.Type == "http://schemas.microsoft.com/identity/claims/displayname"); *@
+        @* var name = nameClaim == null ? null : nameClaim.Value; *@
+        @* <p>Hello, @name</p> *@
+        <h1 class="display-4">Welcome</h1>
+        <p>Hello User Good Day</p>
+        <p>You Passed SAML Authentication Successfully</p>
+        <p>Congratulations & Celebrations</p>
+
+
+    }
+    else
+    {
+        @* <a class="nav-link text-dark" asp-controller="Auth" asp-action="Login">Login</a> *@
+        <h1 class="display-4">Welcome</h1>
+        <p>Hello User Good Day</p>
+        <p>As This Application Was Build On Dotnet To Test The SAML Configuration</p>
+        <p>Try Using Login Button To Test SAML Service Provider</p>
+    }
+    @* <p>You Passed SAML Authentication Successfully</p> *@
+    @* <p>Congratulations & Celebrations</p> *@
+    
+    @* <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@
+</div>
