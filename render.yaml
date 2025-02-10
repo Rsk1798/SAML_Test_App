@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: SAML_Test_App
+    # runtime: dotnet
+    # buildCommand: dotnet publish -c Release -o ./publish
+    # startCommand: dotnet ./publish/YourAppName.dll --urls http://0.0.0.0:$PORT
+    # env: dotnet
+    runtime: docker # Render now uses Docker to build your app
+    # env: dotnet
+    buildCommand: ""
+    startCommand: ""

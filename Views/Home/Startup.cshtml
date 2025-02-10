@@ -1,0 +1,98 @@
+﻿@{
+    Layout = null;  // Disable the layout for this specific view
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <style>
+        body {
+            background: #eee !important;
+        }
+
+        .wrapper {
+            margin-top: 80px;
+            margin-bottom: 80px;
+        }
+
+        .form-signin {
+            max-width: 380px;
+            padding: 15px 35px 45px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+            .form-signin .form-signin-heading,
+            .form-signin .checkbox {
+                margin-bottom: 30px;
+            }
+
+            .form-signin .checkbox {
+                font-weight: normal;
+            }
+
+            .form-signin .form-control {
+                position: relative;
+                font-size: 16px;
+                height: auto;
+                padding: 10px;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                box-sizing: border-box;
+            }
+
+                .form-signin .form-control:focus {
+                    z-index: 2;
+                }
+
+            .form-signin input[type=text] {
+                margin-bottom: -1px;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
+            .form-signin input[type=password] {
+                margin-bottom: 20px;
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+            }
+
+            .custom-login-btn {
+                background-color: #28a745; /* Green background */
+                color: white;
+                font-size: 18px;
+                padding: 12px 10px;
+                border-radius: 10px; /* Rounded corners */
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow */
+                border: none; /* Remove border */
+                font-weight: bold;
+            }
+
+            .custom-login-btn:hover {
+                background-color: #218838; /* Darker green on hover */
+            }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <form class="form-signin">
+            <h2 class="display-4">Welcome To The SAML Test Application</h2>
+            @* <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" /> *@
+            @* <input type="password" class="form-control" name="password" placeholder="Password" required="" /> *@
+            @* <label class="checkbox"> *@
+            @*     <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me *@
+            @* </label> *@
+            @* <h1 class="display-4">Welcome</h1> *@
+            <p>Hello User Good Day</p>
+            <p>As This Application Was Build On Dotnet To Test The SAML Configuration</p>
+            <p>Try Using Login Button To Test SAML Service Provider</p>
+            
+            <button class="custom-login-btn" onclick="location.href='@Url.Action("Login", "Auth")'">Login Using Azure AD IDP / Azure AD B2C IDP</button>
+        </form>
+    </div>
+</body>
+</html>
+
