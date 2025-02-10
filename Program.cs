@@ -1,8 +1,27 @@
 using ITfoxtec.Identity.Saml2.MvcCore.Configuration;
 using ITfoxtec.Identity.Saml2.Schemas.Metadata;
 using ITfoxtec.Identity.Saml2;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Configure Kestrel to use Render's dynamic HTTP port
+builder.WebHost.ConfigureKestrel(options =>
+{
+    // Use Render's PORT environment variable (defaults to 10000)
+    var port = int.Parse(Environment.GetEnvironmentVariable("PORT") ?? "10000");
+    options.ListenAnyIP(port);
+});
+
+// Trust Render's proxy headers (for HTTPS detection)
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders =
+        ForwardedHeaders.XForwardedFor |
+        ForwardedHeaders.XForwardedProto;
+    options.KnownNetworks.Clear();
+    options.KnownProxies.Clear();
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -32,6 +51,9 @@ builder.Services.Configure<Saml2Configuration>(saml2Configuration =>
 builder.Services.AddSaml2();
 
 var app = builder.Build();
+
+// Use forwarded headers before other middleware
+app.UseForwardedHeaders();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
