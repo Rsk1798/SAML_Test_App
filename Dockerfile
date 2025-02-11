@@ -4,7 +4,7 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER $APP_UID
 WORKDIR /app
-EXPOSE 44348
+EXPOSE 8080
 EXPOSE 8081
 
 
@@ -27,4 +27,5 @@ RUN dotnet publish "./SAML_Test_App.csproj" -c $BUILD_CONFIGURATION -o /app/publ
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+ENV ASPNETCORE_ENVIRONMENT=Production # Set environment to production
 ENTRYPOINT ["dotnet", "SAML_Test_App.dll"]
