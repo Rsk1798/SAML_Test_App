@@ -50,6 +50,13 @@ builder.Services.Configure<Saml2Configuration>(saml2Configuration =>
 });
 builder.Services.AddSaml2();
 
+// Railway-specific configuration
+builder.Services.Configure<ForwardedHeadersOptions>(options => {
+    options.ForwardedHeaders = ForwardedHeaders.All;
+    options.KnownNetworks.Clear();
+    options.KnownProxies.Clear();
+});
+
 var app = builder.Build();
 
 // Use forwarded headers before other middleware
@@ -62,6 +69,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+// Configure the HTTP request pipeline
+app.UseForwardedHeaders();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
