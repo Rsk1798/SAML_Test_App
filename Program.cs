@@ -26,6 +26,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Railway-specific configuration
+builder.Services.Configure<ForwardedHeadersOptions>(options => {
+    options.ForwardedHeaders = ForwardedHeaders.All;
+    options.KnownNetworks.Clear();
+    options.KnownProxies.Clear();
+});
+
 builder.Services.AddRazorPages();
 ConfigurationManager configuration = builder.Configuration;
 builder.Services.Configure<Saml2Configuration>(configuration.GetSection("Saml2"));
@@ -54,6 +61,10 @@ var app = builder.Build();
 
 // Use forwarded headers before other middleware
 // app.UseForwardedHeaders();
+
+// Configure the HTTP request pipeline
+app.UseForwardedHeaders();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
