@@ -29,6 +29,4 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 # Set environment to production
 ENV ASPNETCORE_ENVIRONMENT=Production 
-ENV ASPNETCORE_URLS=http://+:8080
-EXPOSE 8080
 ENTRYPOINT ["dotnet", "SAML_Test_App.dll"]
