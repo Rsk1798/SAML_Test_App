@@ -43,7 +43,7 @@ namespace SAML_Test_App.Controllers
             binding.Unbind(Request.ToGenericHttpRequest(), saml2AuthnResponse);
             await saml2AuthnResponse.CreateSession(HttpContext);
             // return Redirect("https://localhost:44348");
-            return Redirect("https://samltestapp-production.up.railway.app");
+            return Redirect("https://samltestapp-production.up.railway.app/Auth/SamlResponse");
         }
 
         public IActionResult Index()
