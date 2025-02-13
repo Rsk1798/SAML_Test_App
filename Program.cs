@@ -2,6 +2,7 @@ using ITfoxtec.Identity.Saml2.MvcCore.Configuration;
 using ITfoxtec.Identity.Saml2.Schemas.Metadata;
 using ITfoxtec.Identity.Saml2;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,22 @@ builder.Services.Configure<ForwardedHeadersOptions>(options => {
     options.KnownNetworks.Clear();
     options.KnownProxies.Clear();
 });
+
+
+// public static IHostBuilder CreateHostBuilder(string[] args) =>
+//static IHostBuilder CreateHostBuilder(string[] args) =>
+//    Host.CreateDefaultBuilder(args)
+//        .ConfigureAppConfiguration((context, config) =>
+//        {
+//            // Force the environment to Production for debugging purposes
+//            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
+//            context.HostingEnvironment.EnvironmentName = environment;
+//        })
+//        .ConfigureWebHostDefaults(webBuilder =>
+//        {
+//            webBuilder.UseStartup<Program>();
+//        });
+
 
 builder.Services.AddRazorPages();
 ConfigurationManager configuration = builder.Configuration;
